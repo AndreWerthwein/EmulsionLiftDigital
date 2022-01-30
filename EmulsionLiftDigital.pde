@@ -5,6 +5,16 @@ int imageSize = 1200;
 int smallFrameSize = 66;
 int bigFrameSize = 305;
 int windowWidth, windowHeight;
+int pixelArrayLength = imageSize * imageSize;
+
+// pixel positions
+IntList positionX = new IntList();
+IntList positionY = new IntList();
+
+// colors per channel
+FloatList red = new FloatList();
+FloatList green = new FloatList();
+FloatList blue = new FloatList();
   
 void settings() {
   // calculate proper window sizes
@@ -16,11 +26,12 @@ void settings() {
 void setup() {  
   background(255);
   originalImage = loadImage("test.jpg");
-  image(originalImage, smallFrameSize, smallFrameSize);
+  
   noLoop();
 }
 
 void draw() {
- checkForSquareFormat(originalImage); 
- saveFrame("new.jpg");
+ checkForSquareFormat(originalImage);
+ readingImageInformation(originalImage);
+ // saveFrame("new.jpg");
 }
