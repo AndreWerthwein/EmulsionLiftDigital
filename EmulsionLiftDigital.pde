@@ -2,9 +2,8 @@ PImage originalImage;
 
 // frame-configuration
 int imageSize = 1200;
-int smallFrameSize = 66;
-int bigFrameSize = 305;
-int windowWidth, windowHeight;
+int borderSize = 50;
+int windowSize;
 int pixelArrayLength = imageSize * imageSize;
 
 // pixel positions
@@ -18,14 +17,13 @@ FloatList blue = new FloatList();
   
 void settings() {
   // calculate proper window sizes
-  windowWidth = smallFrameSize + imageSize + smallFrameSize;
-  windowHeight = smallFrameSize + imageSize + bigFrameSize;
-  size(windowWidth, windowHeight);
+  windowSize = (borderSize * 2) + imageSize;
+  size(windowSize, windowSize);
 }
 
 void setup() {  
   background(255);
-  originalImage = loadImage("test.jpg");
+  originalImage = loadImage("portrait.jpg");
   
   noLoop();
 }
@@ -33,5 +31,6 @@ void setup() {
 void draw() {
  checkForSquareFormat(originalImage);
  readingImageInformation(originalImage);
- // saveFrame("new.jpg");
+ noise2DSimple(originalImage, positionX, positionY, red, green, blue);
+ saveFrame("new.jpg");
 }
